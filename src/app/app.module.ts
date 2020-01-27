@@ -5,18 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatIconModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatButtonModule, MatCardModule, MatGridListModule, MatIconModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { VideoListComponent } from './video-list/video-list.component'; 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VideoListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
     MatIconModule,
     MatToolbarModule
   ],
