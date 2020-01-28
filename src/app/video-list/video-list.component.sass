@@ -1,20 +1,41 @@
-.container-result
-    display: flex
-    flex-wrap: wrap
-    align-content: space-between
-    margin: 20px 0
-
-.mat-card
-    width: calc(100% / 8)
-    margin: 0 auto
-
 .header-image
-    background-image: url('https://images.vexels.com/media/users/3/137425/isolated/preview/f2ea1ded4d037633f687ee389a571086-icono-de-youtube-logo-by-vexels.png')
-    background-size: cover
+	background-image: url('https://images.vexels.com/media/users/3/137425/isolated/preview/f2ea1ded4d037633f687ee389a571086-icono-de-youtube-logo-by-vexels.png')
+	background-size: cover
 
 .card-full-width
-    width: initial
+	width: initial
 
-.js-reframe 
-    width: 80%
-    margin: 0 auto
+.card-selected
+	background-color: #a1cb00
+	color: white
+
+
+//Desktop 
+@media only screen and ( min-width: 768px )
+	.container-result
+		display: flex
+		flex-wrap: wrap
+		align-content: space-between
+		margin: 20px 0
+	.container-reframe 
+		width: 100%
+		margin: 20px
+	.container-iframeInfo
+		display: flex
+	.card-result
+		width: calc(100% / 8)
+		margin: 0 auto
+
+
+//Mobile
+@media only screen and ( max-width: 768px )
+	.container-reframe 
+		width: 95%
+		margin: 0 auto
+	.card-result
+		width: calc( 100% / 3 )
+		display: inline-block
+		margin: 0 auto
+	.container-result
+		white-space: nowrap
+		overflow-x: scroll

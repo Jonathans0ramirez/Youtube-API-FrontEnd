@@ -13,17 +13,16 @@ export class VideoListComponent implements OnInit {
   //Array from app-component (search bar)
   videos$: Array<any>;
 
-  //Array of Snippet element of videos$
-  videosSnippet: Array<any>;
+  //Processed array of videos$
+  videos: Array<any>;
   
-  //Array of Id element of videos$
-  videosId: Array<any>;
+  //Array of elements of Id object of videos$
+  IdElementVideo: Array<any>;
 
   //Array of Selected Video
   videoSelected: Array<any>;
-  
-  subscription: Subscription;
 
+  //Variables Youtube-API
   public video: String;
   public player: any;
   public reframed: Boolean = false;
@@ -35,13 +34,13 @@ export class VideoListComponent implements OnInit {
     this.isSearching = false;
 }
 
-  initIframe(videoId: string) {
+  initIframe() {
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    this.video = videoId; //video id
+    console.log(this.video);
 
     window['onYouTubeIframeAPIReady'] = (e) => {
       this.player = new window['YT'].Player('player', {
@@ -61,25 +60,43 @@ export class VideoListComponent implements OnInit {
   }
 
   selectVideo(video: any) {
-    console.log(video);
-    this.videoSelected = video;
+    if(!(video instanceof Array)){
+      video = [video];
+    } 
+    this.videoSelected = video[0];
+    for (const obj of this.videos) {
+      if (obj == this.videoSelected) {
+        obj.isSelected = true;
+      } else {
+        obj.isSelected = false;
+      }
+      
+    }
+    this.IdElementVideo = video.map((response) => {
+      return response.id.videoId;
+    });
+    this.video = this.IdElementVideo.toString();
+    this.player.loadVideoById(this.video);      
   }
 
   ngOnInit() {
     this.messageService.currentMessage.subscribe(message => { 
       this.videos$ = message; 
-      
+      console.log(this.videos$);
       if (this.videos$.length > 2) {
         // console.log(this.videos$);
-        this.videosSnippet = this.videos$.map((response: any) => {
-          return response.snippet;
+        this.videos = this.videos$.map((response: any) => {
+          return response;
         });
         // console.log(this.videosSnippet);
-        this.videosId = this.videos$.map((response) => {
+        this.IdElementVideo = this.videos$.map((response) => {
           return response.id;
         });
         // console.log(this.videosId);
-        this.initIframe(this.videosId[0].videoId.toString());
+        this.video = this.IdElementVideo[0].videoId.toString();
+        this.videos$[0].isSelected = true;
+        this.videoSelected = this.videos$[0];
+        this.initIframe();
       }
     });
     
@@ -120,5 +137,4 @@ export class VideoListComponent implements OnInit {
         break;
     };
   };
-
 }
