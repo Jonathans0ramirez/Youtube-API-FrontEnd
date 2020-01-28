@@ -1,12 +1,24 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <img class="exp-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/512px-Angular_full_color_logo.svg.png" alt="LOGO" height="30" width="30">
+  <mat-toolbar-row *ngIf="!toSearch">
+    <img class="exp-logo" src="https://www.experimentality.co/wp-content/uploads/2017/04/experimentalitycerebro.png" alt="LOGO" height="35" width="35">
     <span>Youtube API</span>
     <span class="toolbar-spacer"></span>
-    <button mat-icon-button aria-label="Youtube Search Button">
+    <button mat-icon-button aria-label="Youtube Search Button" (click)="toggleInputSearch()">
       <mat-icon aria-hidden="false" aria-label="Youtube Search">youtube_searched_for</mat-icon>
     </button>
   </mat-toolbar-row>
-</mat-toolbar>  
+
+  <mat-toolbar-row *ngIf="toSearch">
+    <img class="exp-logo" src="https://www.experimentality.co/wp-content/uploads/2017/04/experimentalitycerebro.png" alt="LOGO" height="35" width="35">
+    <form class="form" (keydown)="keyDownFunction($event)">
+      <mat-form-field class="full-width-field">
+        <input matInput #videoSearchInput placeholder="Search Video...">
+      </mat-form-field>
+      <button mat-icon-button aria-label="Close Search Button" (click)="toggleInputSearch()">
+        <mat-icon aria-hidden="false" aria-label="Close Search">close</mat-icon>
+      </button>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar> 
 
 <router-outlet></router-outlet>

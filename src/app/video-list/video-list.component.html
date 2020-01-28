@@ -1,50 +1,26 @@
-<div class="container-result">
-    <mat-card>
+<div class="container-result" *ngIf="videosSnippet">
+    <mat-card *ngFor="let video of videosSnippet" (click)="selectVideo(video)">
+        <img mat-card-image src="{{video.thumbnails.medium.url}}" alt="Photo of {{video.title}}">
         <mat-card-header>
-            <div mat-card-avatar class="header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            <mat-card-title>{{video.title}}</mat-card-title>
+            <mat-card-subtitle>{{video.channelTitle}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
     </mat-card>
-    <mat-card>
+</div>
+
+<div class="container-reduced-centered"><div id="player" *ngIf="videosSnippet"></div></div>
+
+<div class="container" *ngIf="videoSelected">
+    <mat-card class="card-full-width">
         <mat-card-header>
-            <div mat-card-avatar class="header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            <div mat-card-avatar class="header-image" [ngStyle]="{'background-image': 'url(' + videoSelected.thumbnails.default.url + ')'}"></div>
+            <mat-card-title>{{videoSelected.title}}</mat-card-title>
+            <mat-card-subtitle>Published by - {{videoSelected.channelTitle}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar class="header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar class="header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar class="header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    </mat-card>
-    <mat-card>
-        <mat-card-header>
-            <div mat-card-avatar class="header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>
+            {{videoSelected.description}}
+            </p>
+        </mat-card-content>
     </mat-card>
 </div>
