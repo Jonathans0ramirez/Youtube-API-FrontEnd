@@ -27,11 +27,11 @@ export class VideoListComponent implements OnInit {
   public player: any;
   public reframed: Boolean = false;
 
-  isSearching:boolean;
+  framePlayerInit:boolean;
 
   constructor(private messageService: MessageService) {
     // subscribe to home component messages
-    this.isSearching = false;
+    this.framePlayerInit = false;
 }
 
   initIframe() {
@@ -81,10 +81,9 @@ export class VideoListComponent implements OnInit {
 
   ngOnInit() {
     this.messageService.currentMessage.subscribe(message => { 
-      this.videos$ = message; 
-      console.log(this.videos$);
+      this.videos$ = message;
       if (this.videos$.length > 2) {
-        // console.log(this.videos$);
+        console.log("ENTER", this.videos$);
         this.videos = this.videos$.map((response: any) => {
           return response;
         });
@@ -96,7 +95,13 @@ export class VideoListComponent implements OnInit {
         this.video = this.IdElementVideo[0].videoId.toString();
         this.videos$[0].isSelected = true;
         this.videoSelected = this.videos$[0];
-        this.initIframe();
+        if (!this.framePlayerInit) {
+          this.initIframe();
+          this.framePlayerInit = true; 
+        }
+        else {
+          this.player.loadVideoById(this.video); 
+        }
       }
     });
     
