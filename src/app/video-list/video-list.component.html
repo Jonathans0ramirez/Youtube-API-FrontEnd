@@ -1,0 +1,28 @@
+<div class="container-result" *ngIf="videos">
+    <mat-card class="card-result" *ngFor="let video of videos" (click)="selectVideo(video)" [ngClass]="{'card-selected': video.isSelected}">
+        <img mat-card-image src="{{video.snippet.thumbnails.medium.url}}" alt="Photo of {{video.snippet.title}}">
+        <mat-card-header>
+            <mat-card-title>{{video.snippet.title}}</mat-card-title>
+            <mat-card-subtitle>{{video.snippet.channelTitle}}</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<div class="container-iframeInfo">
+    <div class="container-reframe"><div id="player" *ngIf="videos"></div></div>
+
+    <div class="container" *ngIf="videoSelected">
+        <mat-card class="card-full-width">
+            <mat-card-header>
+                <div mat-card-avatar class="header-image" [ngStyle]="{'background-image': 'url(' + videoSelected.snippet.thumbnails.default.url + ')'}"></div>
+                <mat-card-title>{{videoSelected.snippet.title}}</mat-card-title>
+                <mat-card-subtitle>Published by - {{videoSelected.snippet.channelTitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                {{videoSelected.snippet.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
