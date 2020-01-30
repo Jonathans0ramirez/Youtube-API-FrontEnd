@@ -27,6 +27,7 @@ export class VideoListComponent implements OnInit {
   public player: any;
   public reframed: Boolean = false;
 
+  //Boolean to detect when Iframe has been init
   framePlayerInit:boolean;
 
   constructor(private messageService: MessageService) {
@@ -34,6 +35,7 @@ export class VideoListComponent implements OnInit {
     this.framePlayerInit = false;
 }
 
+//Initialize Youtube Frame
   initIframe() {
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -59,6 +61,7 @@ export class VideoListComponent implements OnInit {
     };
   }
 
+  //This method gets videoId from selection and reproduces it.
   selectVideo(video: any) {
     if(!(video instanceof Array)){
       video = [video];
@@ -87,11 +90,9 @@ export class VideoListComponent implements OnInit {
         this.videos = this.videos$.map((response: any) => {
           return response;
         });
-        // console.log(this.videosSnippet);
         this.IdElementVideo = this.videos$.map((response) => {
           return response.id;
         });
-        // console.log(this.videosId);
         this.video = this.IdElementVideo[0].videoId.toString();
         this.videos$[0].isSelected = true;
         this.videoSelected = this.videos$[0];

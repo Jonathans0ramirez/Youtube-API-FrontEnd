@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 })
 export class YoutubeService {
 
-  //Complete URI https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyCuoHEgDzAy0YIgSibfyrd4qxy4KHtFqnk&maxResults=6&q=
   youtubeAPI = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyDXJvuh9aNABQE90clBYPe1D2xXIJB4eD4&maxResults=6&q=';
 
   constructor(public http: HttpClient) { }

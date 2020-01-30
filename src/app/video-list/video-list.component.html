@@ -8,7 +8,7 @@
     </mat-card>
 </div>
 
-<div class="container-iframeInfo">
+<div class="container-iframeInfo" *ngIf="videos">
     <div class="container-reframe"><div id="player" *ngIf="videos"></div></div>
 
     <div class="container" *ngIf="videoSelected">
@@ -25,4 +25,8 @@
             </mat-card-content>
         </mat-card>
     </div>
+</div>
+
+<div class="container" *ngIf="!videos">
+    <mat-card class="card-selected card-ppal">¡Ahora puedes buscar y escuchar la canción que desees!</mat-card>
 </div>
