@@ -42,8 +42,6 @@ export class VideoListComponent implements OnInit {
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    console.log(this.video);
-
     window['onYouTubeIframeAPIReady'] = (e) => {
       this.player = new window['YT'].Player('player', {
         videoId: this.video,
@@ -86,7 +84,6 @@ export class VideoListComponent implements OnInit {
     this.messageService.currentMessage.subscribe(message => { 
       this.videos$ = message;
       if (this.videos$.length > 2) {
-        console.log("ENTER", this.videos$);
         this.videos = this.videos$.map((response: any) => {
           return response;
         });
