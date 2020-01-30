@@ -53,6 +53,7 @@ export class VideoListComponent implements OnInit {
               this.reframed = true;
               reframe(e.target.a);
             }
+            e.target.playVideo();
           }
         }
       });
