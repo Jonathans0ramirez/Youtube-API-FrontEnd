@@ -6,22 +6,47 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## :open_file_folder: Documentation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Here the most important elements of the project will be documented.
 
-## Build
+## Angular Material
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Angular material modules
 
-## Running unit tests
+```import { MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatInputModule } from '@angular/material';```
+```import { MatToolbarModule } from '@angular/material/toolbar';```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Youtube API consumption
 
-## Running end-to-end tests
+The way to consume the API
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+      youtubeAPI = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyDXJvuh9aNABQE90clBYPe1D2xXIJB4eD4&maxResults=6&q=';
 
-## Further help
+      constructor(public http: HttpClient) { }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+      searchVideoInfo (search: string) {
+        return this.http.get(this.youtubeAPI + search).pipe(map((response: any) => {
+          return response.items;
+        }));
+      }
+
+## Communication between components
+
+The following service was used to share data between components.
+
+>**Message Service**
+
+    private messageSource = new BehaviorSubject([0]);
+    currentMessage = this.messageSource.asObservable();
+
+    changeMessage(message: Array<any>) {
+        this.messageSource.next(message)
+    }
+
+## Views
+
+:computer: Desktop | :iphone: Mobile
+------------ | -------------
+![Doc_DesktopGif](https://user-images.githubusercontent.com/42523266/73419237-5d1b3280-42ec-11ea-97ed-920a5787deb2.gif) | ![Doc_MobileGif](https://user-images.githubusercontent.com/42523266/73419118-f8f86e80-42eb-11ea-9271-a626568306f5.gif)
+
