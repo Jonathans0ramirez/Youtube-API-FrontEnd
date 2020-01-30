@@ -31,7 +31,7 @@ The way to consume the API
         }));
       }
 
-## Communication between components
+## :link: Communication between components
 
 The following service was used to share data between components.
 
@@ -42,6 +42,54 @@ The following service was used to share data between components.
 
     changeMessage(message: Array<any>) {
         this.messageSource.next(message)
+    }
+
+## app.component
+
+This function is called when `Enter` key is pressed, consumes Youtube API and send the response to video-list component.
+
+    keyDownFunction(event) {
+      if(event.keyCode == 13) {
+        this.isSearching = true;
+          this.youtubeApiService.searchVideoInfo(this.renderer.selectRootElement(this.videoSearchInput.nativeElement).value).subscribe(data => {
+            this.isSearching = false;
+            this.apiResponse = data;
+            this.newMessage(this.apiResponse);
+          },(err)=>{
+            this.isSearching = false;
+            console.log('error',err);
+          });
+      }
+    }
+
+This function is used to send the response to a component.
+
+    newMessage(data: Array<any>) {
+      this.transferDataService.changeMessage(data);
+    }
+
+## video-list Component
+
+This function gets videoId from selection and reproduces it.
+
+    selectVideo(video: any) {
+      if(!(video instanceof Array)){
+        video = [video];
+      } 
+      this.videoSelected = video[0];
+      for (const obj of this.videos) {
+        if (obj == this.videoSelected) {
+          obj.isSelected = true;
+        } else {
+          obj.isSelected = false;
+        }
+
+      }
+      this.IdElementVideo = video.map((response) => {
+        return response.id.videoId;
+      });
+      this.video = this.IdElementVideo.toString();
+      this.player.loadVideoById(this.video);      
     }
 
 ## Views
